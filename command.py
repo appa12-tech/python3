@@ -10,7 +10,7 @@ def takecommand():
         audio = r.listen(source)
     try:
         print("Re")
-        query = r.recognize_google(audio,'en=IN')
+        query = r.recognize_google(audio,'en=US')
         print(query)
     except Exception as e:
         print(e)

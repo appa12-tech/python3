@@ -25,10 +25,10 @@ def date():
 #date()
 def wishme():
     speak("Welcome back sir")
-    speak("Time is ")
+    #speak("Time is ")
 
-    time()
-    date()
+    #time()
+    #date()
     hour=datetime.datetime.now().hour
     if hour >=6 and hour <=12:
         speak("Good Morning")
@@ -54,4 +54,15 @@ def takecomand():
         speak("Say that again please...")
         return "None"
     return query
-takecomand()
+#takecomand()
+if __name__ =="__main__":
+    wishme()
+    while True:
+        query = takecomand().lower()
+        print(query)
+        if "time" in query :
+            time()
+        elif "date" in query :
+            date()
+        elif "offline" in query :
+            quit()
