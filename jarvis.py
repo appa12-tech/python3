@@ -24,6 +24,16 @@ def date():
 def wishme():
     speak("Welcome back sir")
     speak("Time is ")
+
     time()
     date()
+    hour=datetime.datetime.now().hour
+    if hour >=6 and hour <=12:
+        speak("Good Morning")
+    elif hour >=12 and hour <18:
+        speak("Good Afternoon")
+    elif hour >=18 and hour <=24:
+        speak("Good Evening")
+    else:
+        speak("Good Night")
 wishme()
