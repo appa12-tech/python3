@@ -1,5 +1,7 @@
 import pyttsx3
 import datetime
+import speech_recognition as sr
+import pyaudio
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 engine.setProperty('voice',voices[1].id)
@@ -36,4 +38,20 @@ def wishme():
         speak("Good Evening")
     else:
         speak("Good Night")
-wishme()
+#wishme()
+def takecomand():
+    r=sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening.....")
+        r.pause_threshold = 1
+        audio = r.listen(source)
+    try:
+        print("Re")
+        query = r.recognize_google(audio,'en=US')
+        print(query)
+    except Exception as e:
+        print(e)
+        speak("Say that again please...")
+        return "None"
+    return query
+takecomand()
