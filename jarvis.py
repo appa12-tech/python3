@@ -6,6 +6,7 @@ import wikipedia
 import smtplib
 import webbrowser as wb
 import os
+import pyautogui
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 engine.setProperty('voice',voices[1].id)
@@ -67,6 +68,10 @@ def sendmail(to,context):
     server.login("test@gmail.com","123test")
     server.sendmail("test@gmail.com",to,context)
     server.close()
+
+def screenshot():
+    img=pyautogui.screenshot()
+    img.save(r'C:\Users\17bcs\Videos\ss.png')
 if __name__ =="__main__":
     wishme()
     while True:
@@ -119,3 +124,6 @@ if __name__ =="__main__":
         elif "do you know something" in query:
             remember= open("data.txt","r")
             speak("you said me to remember that "+ remember.read())
+        elif"take a picture" in query:
+            screenshot()
+            speak("Done")
