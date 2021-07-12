@@ -1,25 +1,27 @@
-import pyttsx3
-import datetime
-import speech_recognition as sr
-import pyaudio
-import wikipedia
-import smtplib
+import pyttsx3   #pip install pyttsx3
+import datetime  #pip install datetime
+import speech_recognition as sr #pip install SpeechRecognition
+import pyaudio  #first insatall pipwin by pip install pipwin and pipwin install pyaudio
+import wikipedia #pip install wikipedia
+import smtplib #pip install smtplib
 import webbrowser as wb
 import os
-import pyautogui
+import pyautogui #pip install pyautogui
+import psutil #pip install psutil
+import pyjokes #pip install pyjokes
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 engine.setProperty('voice',voices[1].id)
 newVoiceRate=190
 engine.setProperty('rate',newVoiceRate)
-def speak(audio):
+def speak(audio): #for audio
     engine.say(audio)
     engine.runAndWait()
-def time():
+def time(): #function for Time
     Time = datetime.datetime.now().strftime("%I:%M:%S")
     speak(Time)
 #time()
-def date():
+def date():#function for date
     year=int(datetime.datetime.now().year)
     month=int(datetime.datetime.now().month)
     date=int(datetime.datetime.now().day)
@@ -28,7 +30,7 @@ def date():
     speak(month)
     speak(year)
 #date()
-def wishme():
+def wishme(): #function for wishme
     speak("Welcome back sir")
     #speak("Time is ")
 
@@ -45,7 +47,7 @@ def wishme():
         speak("Good Night")
     speak("Kanchi at your service sir and madam ")
 #wishme()
-def takecomand():
+def takecomand(): #funtion for take command from user
     r=sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening.....")
@@ -61,7 +63,7 @@ def takecomand():
         return "None"
     return query
 #takecomand()
-def sendmail(to,context):
+def sendmail(to,context): #function to send a Email
     server = smtplib.SMTP('smtp.gmail.com'),587
     server.ehlo()
     server.starttls()
@@ -69,10 +71,20 @@ def sendmail(to,context):
     server.sendmail("test@gmail.com",to,context)
     server.close()
 
-def screenshot():
+def screenshot(): #function to screenshot
     img=pyautogui.screenshot()
     img.save(r'C:\Users\17bcs\Videos\ss.png')
-if __name__ =="__main__":
+
+def cpu(): #function for cpu and battery
+    usage = str(psutil.cpu_percent())
+    speak("CPU is at "+usage)
+
+    battery = psutil.sensors_battery
+    speak("battery is at")
+    speak(battery.percent )
+def jokes(): #function to crack a jokes
+    speak(pyjokes.get_jokes())
+if __name__ =="__main__": #main funtion
     wishme()
     while True:
         query = takecomand().lower()
@@ -127,3 +139,7 @@ if __name__ =="__main__":
         elif"take a picture" in query:
             screenshot()
             speak("Done")
+        elif "cpu" in query:
+            cpu()
+        elif "joke" in query:
+            jokes()
