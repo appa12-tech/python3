@@ -42,6 +42,7 @@ def wishme():
         speak("Good Evening")
     else:
         speak("Good Night")
+    speak("Kanchi at your service sir and madam ")
 #wishme()
 def takecomand():
     r=sr.Recognizer()
@@ -104,3 +105,17 @@ if __name__ =="__main__":
             os.system("shutdown /s /t 1")
         elif "restart" in query:
             os.system("shutdown /r /t 1")
+        elif "play songs" in query:
+            songs_dir ="E:\songs"
+            songs=os.listdir(songs_dir)
+            os.startfile(os.path.join(songs_dir,songs[0]))
+        elif "remember that" in query:
+            speak("What should i Remmber")
+            data = takecomand()
+            speak("you said me to remember" + data)
+            remember= open("data.txt","w")
+            remember.write(data)
+            remember.close()
+        elif "do you know something" in query:
+            remember= open("data.txt","r")
+            speak("you said me to remember that "+ remember.read())
